@@ -1,8 +1,7 @@
-      #include <iostream>
+#include <iostream>
 #include <cstdlib>
-#include <windows.h>
-#include <conio.h>
 #include <time.h>
+#include <fstream>
 
 using namespace std;
 
@@ -76,6 +75,10 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);                             //keeps looping until the slot generated is empty
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
+	    ofstream oFile;
+	    oFile.open("Index.txt", ios::app);
+	    oFile << row - 65 << " " << column << endl;
+	    oFile.close();
             count[0]++;
             return 1;
         }
@@ -92,6 +95,10 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);                             //keeps looping until the slot generated is empty
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
+	    ofstream oFile;
+	    oFile.open("Index.txt", ios::app);
+	    oFile << row - 65 << " " << column << endl;
+	    oFile.close();
             count[1]++;
             return 1;
         }
@@ -115,6 +122,10 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
+	    ofstream oFile;
+	    oFile.open("Index.txt", ios::app);
+	    oFile << row - 65 << " " << column << endl;
+	    oFile.close();
             count[2]++;
             return 1;
         }
@@ -131,6 +142,10 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
+	    ofstream oFile;
+	    oFile.open("Index.txt", ios::app);
+	    oFile << row - 65 << " " << column << endl;
+	    oFile.close();
             count[3]++;
             return 1;
         }
@@ -150,6 +165,10 @@ void getdata(parking_lot *x, vehicle *y)                                    //ta
         (y -> time_in) = time(NULL);                                        //time of entry
         cout << "Enter your name as <first name> <surname> :\t";
         cin >> y -> first_name >> y -> surname;                             //takes in user name
+	ofstream oFile;
+	oFile.open("Index.txt", ios::app);
+	oFile << y -> first_name << y -> surname << endl;
+	oFile.close();
     }
 
     else{
@@ -191,13 +210,11 @@ int main()
 	char vehicle_choice;
     char choice;                                                            //Choices, because we want a complicated program worth at least 5 marks
     char *currenttime;                                                      //pointer to a string
-    /*parking_lot *slot;                                                      //pointer to an object
-    parking_lot lot;
-    slot = &lot;                                                            //slot points to lot*/
     parking_lot *slot4 = new parking_lot;
     parking_lot *slot2 = new parking_lot;
     int i = 0;
-    vehicle car[1000], bike[1000];                                                      //array of 1000 cars, because we are too popular for our own good
+    vehicle *wheel4 = new vehicle;
+    vehicle *wheel2 = new vehicle;
     struct tm *t;                                                           //pointer to struct tm
     time_t y;                                                               // variable of a custom datatype
     string fname, sname;
@@ -220,21 +237,27 @@ int main()
         	cin>>vehicle_choice;
         	switch(vehicle_choice)
         	{
-        		case '1':
-        			cout << "\t" << "\t" << "\t" << currenttime << endl;                //shows the time the function is called
-        			slot4 -> disp_lot();
-        			getdata(slot4, (car + i));
-                    break;
+        	case '1':
+        	        cout << "\t" << "\t" << "\t" << currenttime << endl;                //shows the time the function is called
+        		slot4 -> disp_lot();
+        		getdata(slot4, wheel4);
+			slot4 -> disp_lot();
+                        break;
                 case '2':
                 	cout << "\t" << "\t" << "\t" << currenttime << endl;                //shows the time the function is called
-        			slot2 -> disp_lot();
-					getdata(slot2,(bike+i));     
-					break;
-			}
+        		slot2 -> disp_lot();
+			getdata(slot2,wheel2);
+			slot2 -> disp_lot();
+			break;
+
+		default:
+		  cout << "Parameters not recognized. Try again:\t";
+		  goto start;
+		 }
             break;
             
         case '2':
-            cout << "Enter your name as <first name> <surname> :\t";
+	  /*cout << "Enter your name as <first name> <surname> :\t";
             cin >> fname >> sname;
             for(int i = 0; i < 1000; i++){
                 if(car[i].chk_name(fname, sname)){                          //Checks if a car in the parking spot is associated with entered name
@@ -242,7 +265,7 @@ int main()
                                                                             //Sorry, couldn't think of a better name
                 }
             }
-            break;
+            break;*/
         default:
             cout << "Could not recognize parameters. Please try again." << endl;
                                                                             //When the user is too dumb to read that we want 1 or 2
