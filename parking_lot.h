@@ -24,6 +24,7 @@ public:
     friend void getdata(parking_lot*, vehicle*);
     bool allot_space();
     void disp_lot();
+    void change_state(int, int);
 };
 
 #endif

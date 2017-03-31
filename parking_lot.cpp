@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdlib>
+#include <time.h>
+#include <string.h>
 #include <fstream>
 #include "parking_lot.h"
 
@@ -121,4 +123,10 @@ void parking_lot::disp_lot()
     for(n = 0; n < 4; n++)
         cout << "   ";
     cout << "Entry" << endl;                                                //Printing the entry point of the lot
+}
+
+
+void parking_lot::change_state(int row, int column)
+{
+  !space[row][column];
 }

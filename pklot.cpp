@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <string.h>
 #include <time.h>
 #include <fstream>
 
@@ -13,19 +14,28 @@ using namespace std;
 void getdata(parking_lot *x, vehicle *y)                                    //takes input from the user
 {
     cout << "Enter the amount of time you want to park for (in hours):\t";
-    cin >> (x -> time_allot);
-    if(cin.fail()){                                                         //cin function fails in the extraction process
+    do{
+      cin >> (x -> time_allot);
+      if(cin.fail()){                                                         //cin function fails in the extraction process
         cout << "Bad Parameters. Try again:" << endl;
         cin.clear();                                                        //clears out the buffer and resets the cin function
         cin.ignore(32767, '\n');                                            //removes/ignores the bad input
-    }
+	cin >> (x -> time_allot);
+      }
+    }while(cin.fail());
     if((x -> allot_space())){                                               //if space is alloted
-        (y -> time_in) = time(NULL);                                        //time of entry
-        cout << "Enter your name as <first name> <surname> :\t";
-        cin >> y -> first_name >> y -> surname;                             //takes in user name
+        cout << "Enter your full name:\t";
+	cin.ignore();
+        do{
+	  cin.getline(y -> name, 101);                                             //takes in user name
+	  if(strlen(y -> name) >= 101){
+	    cout << "Sorry, your name is too long. Enter something shorter, not more than 100 characters" << endl;
+	  }
+	}while(strlen(y -> name) >= 100);
 	ofstream oFile;
 	oFile.open("Index.txt", ios::app);
-	oFile << y -> first_name << y -> surname << endl;
+	oFile << y -> name  << endl;
+	oFile << time(NULL) << endl;
 	oFile.close();
     }
 
@@ -34,7 +44,35 @@ void getdata(parking_lot *x, vehicle *y)                                    //ta
     }
 }
 
+void charge(string s, parking_lot *x)
+{
+  int row, column, time_in;
+  bool flag = false;
+  string name;
+  ifstream iFile;
+  iFile.open("Index.txt");
+  while(iFile){
+    iFile >> row >> column;
+    iFile.ignore();
+    getline(iFile, name);
+    iFile >> time_in;
+    cout << name << endl;
+    if(name ==(s)){
+      flag = true;
+      break;
+    }
+  }
 
+  if(flag){
+    cout << "Thank you for using PARKINATOR parking systems std. pvt. ltd." << endl;
+    cout << "Your charge is INR " << 20 * (time(NULL) - time_in) << endl;
+    x -> change_state(row, column);
+  }
+
+  else{
+    cout << "We are sorry, we could not find you in the system." << endl;
+  }
+}
 
 
 
@@ -42,7 +80,7 @@ void getdata(parking_lot *x, vehicle *y)                                    //ta
 
 int main()
 {
-	char vehicle_choice;
+    char vehicle_choice;
     char choice;                                                            //Choices, because we want a complicated program worth at least 5 marks
     char *currenttime;                                                      //pointer to a string
     parking_lot *slot4 = new parking_lot;
@@ -52,7 +90,7 @@ int main()
     vehicle *wheel2 = new vehicle;
     struct tm *t;                                                           //pointer to struct tm
     time_t y;                                                               // variable of a custom datatype
-    string fname, sname;
+    string input;
 
 
     do{
@@ -92,15 +130,12 @@ int main()
             break;
             
         case '2':
-	  /*cout << "Enter your name as <first name> <surname> :\t";
-            cin >> fname >> sname;
-            for(int i = 0; i < 1000; i++){
-                if(car[i].chk_name(fname, sname)){                          //Checks if a car in the parking spot is associated with entered name
-                    cout << "Thank you for using PARKINATOR parking systems. Your charge is INR " << car[i].charge()<<endl;
-                                                                            //Sorry, couldn't think of a better name
-                }
-            }
-            break;*/
+	    cout << "Enter your full name:\t";
+	    cin.ignore();
+	    getline(cin, input);
+	    cout << "OK" << endl;
+	    charge(input, slot4);
+            break;
         default:
             cout << "Could not recognize parameters. Please try again." << endl;
                                                                             //When the user is too dumb to read that we want 1 or 2
