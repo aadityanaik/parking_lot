@@ -1,9 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
-#include <string.h>
-#include <fstream>
 #include "parking_lot.h"
+#include "file.h"
 
 #define YES 1
 
@@ -24,10 +23,7 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);                             //keeps looping until the slot generated is empty
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
-	    ofstream oFile;
-	    oFile.open("Index.txt", ios::app);
-	    oFile << row - 65 << " " << column << endl;
-	    oFile.close();
+	    index.append(row, column);
             count[0]++;
             return 1;
         }
@@ -44,10 +40,7 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);                             //keeps looping until the slot generated is empty
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
-	    ofstream oFile;
-	    oFile.open("Index.txt", ios::app);
-	    oFile << row - 65 << " " << column << endl;
-	    oFile.close();
+	    index.append(row, column);
             count[1]++;
             return 1;
         }
@@ -71,10 +64,7 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
-	    ofstream oFile;
-	    oFile.open("Index.txt", ios::app);
-	    oFile << row - 65 << " " << column << endl;
-	    oFile.close();
+	    index.append(row, column);
             count[2]++;
             return 1;
         }
@@ -91,10 +81,7 @@ bool parking_lot::allot_space()                                                 
             }while(space[row - 65][column] == YES);
             cout << "Your space is " << char(row) << column + 1 << endl;
             space[row - 65][column] = 1;
-	    ofstream oFile;
-	    oFile.open("Index.txt", ios::app);
-	    oFile << row - 65 << " " << column << endl;
-	    oFile.close();
+	    index.append(row, column);
             count[3]++;
             return 1;
         }

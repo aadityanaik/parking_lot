@@ -1,15 +1,13 @@
-#include <iostream>
-
-using namespace std;
-
 #ifndef _VEHICLE_H
 #define _VEHICLE_H
+
+#include <iostream>
 
 class parking_lot;
 
 class vehicle
 {
-    char name[101];
+  std::string name, password;
     int time_in, time_out;
     float time_parked;
 public:
