@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <cstring>
 
 #include "file.h"
 
@@ -14,14 +16,18 @@ int File::check_sectn(string username, string password)
   ifstream iFile(name);
   while(iFile){
     iFile >> row >> column;
+    iFile.ignore();
     getline(iFile, x);
     getline(iFile, y);
     iFile >> time_in;
-    if(username == x && password == y){
+    //cout << row << " " << column << endl << x << endl << y << endl << time_in << endl;
+    //if(!(strcmp(x.c_str(), username.c_str()))&& !(strcmp(y.c_str(), password.c_str()))){
+    if(!x.compare(username) && !y.compare(password)){
       flag = true;
       break;
     }
-    sectn++;
+    else
+      sectn++;
   }
   iFile.close();
 
@@ -29,7 +35,8 @@ int File::check_sectn(string username, string password)
     return 0;
   }
   
-  return sectn;
+  else
+    return sectn;
 }
 
 void File::append(int row, int column)
@@ -59,7 +66,7 @@ void File::append(string username, string password)
   oFile.close();
 }
 
-int File::returntime(int sectn)
+int File::returnrow(int sectn)
 {
   ifstream iFile(name);
   int row, column, time_in;
@@ -67,6 +74,7 @@ int File::returntime(int sectn)
 
   for(int i = 1; i <= sectn; i++){
     iFile >> row >> column;
+    iFile.ignore();
     getline(iFile, x);
     getline(iFile, y);
     iFile >> time_in;
@@ -83,6 +91,7 @@ int File::returncolumn(int sectn)
 
   for(int i = 1; i <= sectn; i++){
     iFile >> row >> column;
+    iFile.ignore();
     getline(iFile, x);
     getline(iFile, y);
     iFile >> time_in;
@@ -91,7 +100,7 @@ int File::returncolumn(int sectn)
   return column;
 }
 
-int File::returnrow(int sectn)
+int File::returntime(int sectn)
 {
   ifstream iFile(name);
   int row, column, time_in;
@@ -99,6 +108,7 @@ int File::returnrow(int sectn)
 
   for(int i = 1; i <= sectn; i++){
     iFile >> row >> column;
+    iFile.ignore();
     getline(iFile, x);
     getline(iFile, y);
     iFile >> time_in;

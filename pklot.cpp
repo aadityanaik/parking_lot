@@ -53,18 +53,21 @@ void getdata(parking_lot *x, vehicle *y)                                    //ta
 void charge(string n, string p, parking_lot *x)
 {
   int row, column, time_in, sectn;
-  if((x -> index.check_sectn(n, p))){
+  if((x -> index.check_sectn(n, p)) == 0){
+    //cout << n << endl << p << endl;
     cout << "We are sorry, we could not find you in the system." << endl;
   }
 
   else{
     sectn = x -> index.check_sectn(n, p);
+    cout << sectn << endl;
     time_in = (x -> index.returntime(sectn));
     row = (x -> index.returnrow(sectn));
     column = (x -> index.returncolumn(sectn));
+    //cout << time_in << " " << row << " " << column << endl;
     cout << "Thank you for using PARKINATOR parking systems std. pvt. ltd." << endl;
     cout << "Your charge is INR " << 20 * (time(NULL) - time_in) << endl;
-
+    cout << row << " " << column << endl;
     x -> change_state(row, column);
   }
 }
@@ -138,7 +141,7 @@ int main()
 	    cin.ignore();
 	    getline(cin, input);
 	    cout << "Enter your password:\t";
-	    cin.ignore();
+	    //cin.ignore();
 	    getline(cin, pass);
 	    cout << "OK" << endl;
 	    switch(choice){

@@ -115,5 +115,6 @@ void parking_lot::disp_lot()
 
 void parking_lot::change_state(int row, int column)
 {
-  !space[row][column];
+  space[row][column] = 0;
+  cout << space[row][column] << endl;
 }
