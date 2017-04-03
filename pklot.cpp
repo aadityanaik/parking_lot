@@ -81,8 +81,8 @@ int main()
     char vehicle_choice;
     char choice;                                                            //Choices, because we want a complicated program worth at least 5 marks
     char *currenttime;                                                      //pointer to a string
-    parking_lot *slot4 = new parking_lot("4wheeler/Index");
-    parking_lot *slot2 = new parking_lot("2wheeler/Index");
+    parking_lot *slot4 = new parking_lot("4wheeler\\Index");
+    parking_lot *slot2 = new parking_lot("2wheeler\\Index");
     int i = 0;
     vehicle *wheel4 = new vehicle;
     vehicle *wheel2 = new vehicle;
