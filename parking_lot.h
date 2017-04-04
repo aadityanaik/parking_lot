@@ -12,7 +12,7 @@ class parking_lot
     int count[4];
     float time_allot;
     
-public:
+public: 
     parking_lot(std::string file)
     {
         for(int i = 0; i < 10; i++){

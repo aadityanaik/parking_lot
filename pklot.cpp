@@ -7,82 +7,19 @@
 #include "vehicle.h"
 #include "parking_lot.h"
 #include "file.h"
+#include "functions.h"
 
 using namespace std;
 
 #define YES 1
-
-void getdata(parking_lot *x, vehicle *y)                                    //takes input from the user
-{
-    cout << "Enter the amount of time you want to park for (in hours):\t";
-    do{
-      cin >> (x -> time_allot);
-      if(cin.fail()){                                                         //cin function fails in the extraction process
-        cout << "Bad Parameters. Try again:" << endl;
-        cin.clear();                                                        //clears out the buffer and resets the cin function
-        cin.ignore(32767, '\n');                                            //removes/ignores the bad input
-	cin >> (x -> time_allot);
-      }
-    }while(cin.fail());
-    if((x -> allot_space())){                                               //if space is alloted
-        cout << "Enter your full name:\t";
-	cin.ignore();
-        getline(cin, y -> name);
-
-	string pwdtrial;
-	do{
-	  cout << "Enter a password:\t";
-	  //cin.ignore();
-	  getline(cin, y -> password);
-	  cout << "Confirm your password:\t" << endl;
-	  //cin.ignore();
-	  getline(cin, pwdtrial);
-	  if(pwdtrial != (y -> password)){
-	    cout << "Sorry, passwords do not match" << endl;
-	  }
-	}while(pwdtrial != (y -> password));
-	x -> index.append((y -> name), (y -> password));
-	x -> index.append(time(NULL));
-    }
-
-    else{
-        cout << "Please try after some time" << endl;                       //we need more space, or funds, or a new job
-    }
-}
-
-void charge(string n, string p, parking_lot *x)
-{
-  int row, column, time_in, sectn;
-  if((x -> index.check_sectn(n, p)) == 0){
-    //cout << n << endl << p << endl;
-    cout << "We are sorry, we could not find you in the system." << endl;
-  }
-
-  else{
-    sectn = x -> index.check_sectn(n, p);
-    cout << sectn << endl;
-    time_in = (x -> index.returntime(sectn));
-    row = (x -> index.returnrow(sectn));
-    column = (x -> index.returncolumn(sectn));
-    //cout << time_in << " " << row << " " << column << endl;
-    cout << "Thank you for using PARKINATOR parking systems std. pvt. ltd." << endl;
-    cout << "Your charge is INR " << 20 * (time(NULL) - time_in) << endl;
-    cout << row << " " << column << endl;
-    x -> change_state(row, column);
-  }
-}
-
-
-
-
 
 int main()
 {
     char vehicle_choice;
     char choice;                                                            //Choices, because we want a complicated program worth at least 5 marks
     char *currenttime;                                                      //pointer to a string
-    parking_lot *slot4 = new parking_lot("4wheeler\\Index");
-    parking_lot *slot2 = new parking_lot("2wheeler\\Index");
+    parking_lot *slot4 = new parking_lot("4wheeler/Index");
+    parking_lot *slot2 = new parking_lot("2wheeler/Index");
     int i = 0;
     vehicle *wheel4 = new vehicle;
     vehicle *wheel2 = new vehicle;
@@ -141,7 +78,6 @@ int main()
 	    cin.ignore();
 	    getline(cin, input);
 	    cout << "Enter your password:\t";
-	    //cin.ignore();
 	    getline(cin, pass);
 	    cout << "OK" << endl;
 	    switch(choice){
