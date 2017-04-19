@@ -4,7 +4,7 @@
                                                                                                                
    Authors- The CEOs themselves.                                                                               
                                                                                                                
-    PARKINATOR Parking Systems is an ingenious way of managing your parking lot. Developed by the very people  
+   Parkinator Parking Systems is an ingenious way of managing your parking lot. Developed by the very people  
    who pride themselves in knowing what's best for your parking lot, PARKINATOR can be used almost everywhere, 
    from the rundown garage in the middle of a big city to the most posh Hotels and Plazas around the world.    
    Are you tired of a surplus of frustrated guests trying to get to their cars? Well, not any more! Simply     
