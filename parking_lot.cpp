@@ -28,7 +28,7 @@ bool parking_lot::allot_space()                                                 
             return 1;
         }
     }
-    if(time_allot < 4 && time_allot >=3){                                       //more than 3 hours
+    else if(time_allot < 4 && time_allot >=3){                                       //more than 3 hours
         if(count[1] >= 20){
             cout << "No more space for you" << endl;                            //in case the entire section is occupied
             return 0;
@@ -46,7 +46,7 @@ bool parking_lot::allot_space()                                                 
         }
     }
 
-    if(time_allot < 3 && time_allot >= 1.5){
+    else if(time_allot < 3 && time_allot >= 1.5){
         if(count[2] >= 36){
             cout << "No more space for you" << endl;                            //in case the entire section is occupied
             return 0;
@@ -69,7 +69,7 @@ bool parking_lot::allot_space()                                                 
             return 1;
         }
     }
-    if(time_allot < 1.5 && time_allot > 0){
+    else if(time_allot < 1.5 && time_allot > 0){
         if(count[3] >= 24){
             cout << "No more space for you" << endl;                            //in case the entire section is occupied
             return 0;
